@@ -1,5 +1,7 @@
 #AttachFileBundle
 
+[![Build Status](https://scrutinizer-ci.com/g/it-blaster/attach-file-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/it-blaster/attach-file-bundle/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/it-blaster/attach-file-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/it-blaster/attach-file-bundle/?branch=master)
+
 Вспомогательный бандл для работы с файлами на сайте. Есть возмжность прикреплять несколько файлов к одной сущности. Есть поддержка языковых версий.
 
 ## Установка
@@ -32,7 +34,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new ItBlaster\TranslationBundle\ItBlasterAttachFileBundle(),
+        new ItBlaster\AttachFileBundle\ItBlasterAttachFileBundle(),
     );
 }
 ```

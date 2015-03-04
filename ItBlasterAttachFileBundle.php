@@ -1,6 +1,6 @@
 <?php
 
-namespace ItBlaster\TranslationBundle;
+namespace ItBlaster\AttachFileBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

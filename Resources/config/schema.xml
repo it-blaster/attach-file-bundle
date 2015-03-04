@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database
+        name="default"
+        defaultIdMethod="native"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://xsd.propelorm.org/1.7/database.xsd"
+        namespace="ItBlaster\AttachFileBundle\Model">
+
+    <table name="attach_file" description="Attach files">
+        <column name="id"               type="integer"  required="true" primaryKey="true" autoIncrement="true" />
+        <column name="model"            type="varchar"  required="false" />
+        <column name="field"            type="varchar"  required="false" />
+        <column name="original_name"    type="varchar"  required="false" />
+        <column name="file_name"        type="varchar"  required="false" />
+        <column name="ext"              type="varchar"  required="false" />
+        <column name="size"             type="varchar"  required="false" />
+        <column name="object_id"        type="integer"  required="false" />
+
+        <behavior name="timestampable" />
+    </table>
+
+</database>

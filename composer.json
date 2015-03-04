@@ -12,7 +12,8 @@
         }
     ],
     "require": {
-        "symfony/symfony": ">=2.2"
+        "symfony/symfony": ">=2.2",
+        "propel/propel1": "~1.6"
     },
     "autoload": {
         "psr-0": { "ItBlaster\\AttachFileBundle": "" }
