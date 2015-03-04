@@ -41,8 +41,66 @@ public function registerBundles()
 }
 ```
 
+В `app/config/config.yml` необходимо указать путь до класса бихейвора <b>it_blaster_file</b>
+
+``` bash
+ propel:
+     ...
+     behaviors:
+         ...
+         it_blaster_file: ItBlaster\AttachFileBundle\Behavior\AttachFileBehavior
+```
+
 Usage
 -----
+
+В файле `schema.yml` подключите бихейвор <b>it_blaster_file</b>
+``` xml
+    <table name="example">
+        <column name="id"           type="integer"  required="true" primaryKey="true" autoIncrement="true" />
+        <column name="title"        type="varchar"  required="true" primaryString="true" />
+        <column name="image"        type="integer" />
+
+        <behavior name="it_blaster_file" >
+            <parameter name="file_columns" value="image" />
+        </behavior>
+    </table>
+```
+В параметре <b>file_columns</b> необходимо указать имя поля изображения. В данном примере этим полем является поле <b>image</b>. Если к сущности необходимо прекреплять несколько файлов, названия полей в параметре <b>file_columns</b> нужно указать через запятую, например:
+``` xml
+    <table name="example">
+        <column name="id"           type="integer"  required="true" primaryKey="true" autoIncrement="true" />
+        <column name="title"        type="varchar"  required="true" primaryString="true" />
+        <column name="logo"         type="integer" />
+        <column name="sheet"        type="integer" />
+
+        <behavior name="it_blaster_file" >
+            <parameter name="file_columns" value="logo, sheet" />
+        </behavior>
+    </table>
+```
+Поля файлов должны иметь тип <b>integer</b>
+
+Use i18n
+-------
+Если вы используете языковые версии на сайте на основе propel-бихейвора `i18n` и к каждому переводу необходимо прикреплять файл, то вам необходимо в основной таблице (example) указать параметр `i18n`, где будет имя поля файла, и в соответствующей таблице с переводами (example_i18n) укзать параметр `file_columns`, в котором будет то же самое значение поля файла. Пример:
+``` xml
+    <table name="example">
+        <column name="id"           type="integer"  required="true" primaryKey="true" autoIncrement="true" />
+        <column name="title"        type="varchar"  required="true" primaryString="true" />
+        <column name="logo"         type="integer" />
+
+        <behavior name="it_blaster_file" >
+            <parameter name="file_columns" value="logo" />
+        </behavior>
+    </table>
+
+    <table name="example_i18n">
+        <behavior name="it_blaster_file" >
+            <parameter name="file_columns" value="logo" />
+        </behavior>
+    </table>
+```
 
 
 Credits
