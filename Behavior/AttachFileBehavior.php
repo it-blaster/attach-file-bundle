@@ -14,6 +14,7 @@ class AttachFileBehavior extends \Behavior
         'file_columns'  =>  '',
         'i18n'  => ''
     );
+    protected $builder;
 
     protected $file_columns = array();
     protected $i18n_file_columns = array();
@@ -86,7 +87,7 @@ protected $file_fields = array(';
         $this->getClassAlias($script);
 
         if ($this->getParameter('i18n')) {
-            $this->deleteI18nFiles($script);
+            $this->addDeleteI18nFiles($script);
         }
 
         if (count($this->file_columns)) {
@@ -94,16 +95,16 @@ protected $file_fields = array(';
             $this->deleteFiles($script);
             $this->getFileObject($script);
             foreach ($this->file_columns as $file_column) {
-                $this->getColumnFile($script, $file_column);
-                $this->setColumnFile($script, $file_column);
-                $this->getColumnPath($script, $file_column);
+                $this->addGetColumnFile($script, $file_column);
+                $this->addSetColumnFile($script, $file_column);
+                $this->addGetColumnPath($script, $file_column);
             }
         }
 
         if (count($this->i18n_file_columns)) {
             foreach ($this->i18n_file_columns as $file_column) {
-                $this->getI18nColumnPath($script, $file_column);
-                $this->getI18nColumnObject($script, $file_column);
+                $this->addGetI18nColumnPath($script, $file_column);
+                $this->addGetI18nColumnObject($script, $file_column);
             }
         }
 
@@ -113,7 +114,7 @@ protected $file_fields = array(';
     /**
      * Удаление прикреплённых файлов к объектам i18n
      */
-    public function deleteI18nFiles(&$script)
+    public function addDeleteI18nFiles(&$script)
     {
         $script .= '
 /**
@@ -195,7 +196,7 @@ public function getClassAlias()
         }
         if ($this->getParameter('i18n')) {
             $script .= "
-\$this->deleteI18nFiles(); //Перед удалением объекта удаляем загруженные файлы";
+\$this->deleteI18nFiles(); //Перед удалением объекта удаляем загруженные i18n файлы";
         }
 
         return $script;
@@ -299,7 +300,7 @@ public function deleteFiles()
      *
      * @param $script
      */
-    protected function getColumnFile(&$script, $file_column)
+    protected function addGetColumnFile(&$script, $file_column)
     {
         $name = $this->CamelCase($file_column);
         $script .= '
@@ -320,7 +321,7 @@ public function get'.$name.'File()
      *
      * @param $script
      */
-    protected function setColumnFile(&$script, $file_column)
+    protected function addSetColumnFile(&$script, $file_column)
     {
         $name = $this->CamelCase($file_column);
         $script .= '
@@ -346,7 +347,7 @@ public function set'.$name.'File($v)
      * @param $script
      * @param $file_column
      */
-    protected function getColumnPath(&$script, $file_column)
+    protected function addGetColumnPath(&$script, $file_column)
     {
         $name = $this->CamelCase($file_column);
         $script .= '
@@ -369,7 +370,7 @@ public function get'.$name.'Path()
      * @param $script
      * @param $file_column
      */
-    protected function getI18nColumnPath(&$script, $file_column)
+    protected function addGetI18nColumnPath(&$script, $file_column)
     {
         $name = $this->CamelCase($file_column);
         $script .= '
@@ -391,7 +392,7 @@ public function get'.$name.'Path()
      * @param $script
      * @param $file_column
      */
-    protected function getI18nColumnObject(&$script, $file_column)
+    protected function addGetI18nColumnObject(&$script, $file_column)
     {
         $name = $this->CamelCase($file_column);
         $script .= '

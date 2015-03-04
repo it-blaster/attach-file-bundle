@@ -24,5 +24,26 @@ class ItBlasterAttachFileExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('types.yml');
+    }
+
+    /**
+     * Подрубаем шаблон виджета
+     *
+     * @param ContainerBuilder $container
+     */
+    protected function registerResources(ContainerBuilder $container)
+    {
+        $templatingEngines = $container->getParameter('templating.engines');
+
+        if (in_array('twig', $templatingEngines)) {
+            $container->setParameter(
+                'twig.form.resources',
+                array_merge(
+                    array('ItBlasterAttachFileBundle:Form:attach_file_widget.html.twig'),
+                    $container->getParameter('twig.form.resources')
+                )
+            );
+        }
     }
 }

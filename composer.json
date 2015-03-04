@@ -13,7 +13,9 @@
     ],
     "require": {
         "symfony/symfony": ">=2.2",
-        "propel/propel1": "~1.6"
+        "propel/propel1": "~1.6",
+        "sonata-project/admin-bundle": ">=2.3",
+        "sonata-project/propel-admin-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": { "ItBlaster\\AttachFileBundle": "" }

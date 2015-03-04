@@ -1,0 +1,5 @@
+services:
+    it_blaster.type.attach_file:
+        class: ItBlaster\AttachFileBundle\Form\Type
+        tags:
+            - {name: form.type, alias: attach_file }
