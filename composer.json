@@ -1,0 +1,22 @@
+{
+    "name": "it-blaster/attach-file-bundle",
+    "description": "Symfony2 bundle. The ability to attach files to the form.",
+    "type": "symfony-bundle",
+    "keywords": ["type", "form", "sluggable", "behavior"],
+    "homepage": "https://github.com/it-blaster/attach-file-bundle",
+    "license" : "MIT",
+    "authors": [
+        {
+            "name": "IT-Blaster",
+            "email": "it-blaster@yandex.ru"
+        }
+    ],
+    "require": {
+        "symfony/symfony": ">=2.2"
+    },
+    "autoload": {
+        "psr-0": { "ItBlaster\\AttachFileBundle": "" }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "ItBlaster/AttachFileBundle"
+}
