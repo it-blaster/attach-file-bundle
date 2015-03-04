@@ -16,6 +16,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class AttachFileType extends FileType
 {
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
@@ -28,6 +31,11 @@ class AttachFileType extends FileType
         ));
     }
 
+    /**
+     * @param FormView $view
+     * @param FormInterface $form
+     * @param array $options
+     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if ($options['multiple']) {
@@ -53,6 +61,9 @@ class AttachFileType extends FileType
         }
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'attach_file';
