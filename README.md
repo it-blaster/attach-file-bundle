@@ -54,6 +54,10 @@ twig:
     form:
         resources:
             - 'ItBlasterAttachFileBundle:Form:attach_file_widget.html.twig'
+
+assetic:
+    bundles:
+        - 'ItBlasterAttachFileBundle'
 ```
 
 В файл app/config/routing.yml необходимо подключить роутинг-файл бандла:
