@@ -41,7 +41,7 @@ public function registerBundles()
 }
 ```
 
-В `app/config/config.yml` необходимо указать путь до класса бихейвора <b>it_blaster_file</b>
+В `app/config/config.yml` необходимо указать путь до класса бихейвора <b>it_blaster_file</b> и подключить js виджета attach_file:
 
 ``` bash
  propel:
@@ -49,6 +49,17 @@ public function registerBundles()
      behaviors:
          ...
          it_blaster_file: ItBlaster\AttachFileBundle\Behavior\AttachFileBehavior
+
+sonata_admin:
+    assets:
+        javascripts:
+            - bundles/itblasterattachfile/js/attach_file_admin.js
+```
+
+В файл app/config/routing.yml необходимо подключить роутинг-файл бандла:
+``` bash
+attach_file:
+    resource: '@ItBlasterAttachFileBundle/Resources/config/routing.yml'
 ```
 
 Usage

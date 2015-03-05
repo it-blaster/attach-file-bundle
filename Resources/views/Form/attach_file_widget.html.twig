@@ -1,4 +1,5 @@
 {# Виджет "Прикреплённый файл с информацией" #}
+
 {% block attach_file_widget %}
     {{- block('form_widget') -}}
     {% if options.help %}
@@ -7,7 +8,7 @@
     {% if object %}
         <div class="file_block" style="padding-top: 5px;">
             <b>Уже добавленный файл:</b> <a href="{{ attach_file.getFilePath() }}" target="_blank">{{ attach_file.getOriginalName() }}</a>
-            <a href="{{ path('cms-file-delete', { 'attach_file':attach_file.id }) }}" class="file_delete" style="margin-left: 10px"><img src="/images/icons/icon-close.png" alt="Удалить" title="Удалить"></a><img src="/images/loader_h.gif" class="loader" style="display: none">
+            <a href="{{ path('admin-attach-file-delete', { 'attach_file':attach_file.id }) }}" class="attach_file_delete" style="margin-left: 10px"><img src="{{ asset('bundles/itblasterattachfile/icon-close.png') }}" alt="Удалить" title="Удалить"></a><img src="{{ asset('bundles/itblasterattachfile/loader_h.gif') }}" class="loader" style="display: none">
             {% if(attach_file.isImage) %}
                 <br /><a href="{{ attach_file.getFilePath() }}" target="_blank"><img src="{{ attach_file.getFilePath() }}" style="max-width: 150px; max-height: 150px"></a>
             {% endif %}

@@ -1,0 +1,4 @@
+#Удаление файла
+admin-attach-file-delete:
+  pattern:  /admin-attach-file-delete/{attach_file}
+  defaults: {_controller: ItBlasterAttachFileBundle:AttachFileAdmin:fileDelete}
