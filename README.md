@@ -98,25 +98,82 @@ Usage
 
 Use i18n
 -------
-Если вы используете языковые версии на сайте на основе propel-бихейвора `i18n` и к каждому переводу необходимо прикреплять файл, то вам необходимо в основной таблице (<b>example</b>) указать параметр `i18n`, где будет имя поля файла, и в соответствующей таблице с переводами (<b>example_i18n</b>) укзать параметр `file_columns`, в котором будет то же самое значение поля файла. Пример:
+Если вы используете языковые версии на сайте на основе propel-бихейвора `i18n` и к каждому переводу необходимо прикреплять файл, то вам необходимо в основной таблице (<b>document</b>) указать параметр `i18n`, где будет имя поля файла, и в соответствующей таблице с переводами (<b>document_i18n</b>) укзать параметр `file_columns`, в котором будет то же самое значение поля файла. Пример:
 ``` xml
-    <table name="example">
+    <table name="document" description="Документ">
         <column name="id"           type="integer"  required="true" primaryKey="true" autoIncrement="true" />
-        <column name="title"        type="varchar"  required="true" primaryString="true" />
-        <column name="logo"         type="integer" />
+        <column name="file_title"   type="varchar"  required="true" primaryString="true" />
+        <column name="active"       type="boolean"  defaultValue="true" />
+        <column name="download"     type="integer"/>
+
+        <behavior name="i18n">
+            <parameter name="i18n_columns" value="file_title, active, download" />
+        </behavior>
+
+        <behavior name="it_blaster_i18n">
+            <parameter name="primary_string" value="file_title" />
+        </behavior>
 
         <behavior name="it_blaster_file" >
-            <parameter name="file_columns" value="logo" />
+            <parameter name="i18n" value="download" />
         </behavior>
     </table>
 
-    <table name="example_i18n">
+    <table name="document_i18n">
         <behavior name="it_blaster_file" >
-            <parameter name="file_columns" value="logo" />
+            <parameter name="file_columns" value="download" />
         </behavior>
     </table>
 ```
-
+Далее подключаем виджет attach_file в фадмин-форме:
+``` xml
+        $formMapper
+            ->add('DocumentI18ns', new TranslationCollectionType(), [
+                'label'     => false,
+                'required'  => false,
+                'type'      => new TranslationType(),
+                'languages' => $this->getConfigurationPool()->getContainer()->getParameter('locales'),
+                'options'   => [
+                    'label'      => false,
+                    'data_class' => 'Artsofte\MainBundle\Model\DocumentI18n',
+                    'columns'    => [
+                        'active' => [
+                            'label' => "Опубликовать",
+                            'type'  => 'checkbox',
+                        ],
+                        'file_title' => [
+                            'label' => "Имя файла",
+                            'type'  => 'text',
+                            'required'  => true,
+                        ],
+                        'download_file' => array(
+                            'type'      => 'attach_file',
+                            'label'     => 'Выберите файл',
+                            'maxSize'   => '20M',
+                            'options' => [
+                                'help' => 'Допустимые типы файлов: pdf, doc, docx, zip, jpg, gif, png',
+                                'constraints' => [
+                                    new \Symfony\Component\Validator\Constraints\File([
+                                        'mimeTypes' => [
+                                            'application/pdf',
+                                            'application/msword',
+                                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                                            'application/vnd.oasis.opendocument.text',
+                                            'application/zip',
+                                            'image/gif',
+                                            'image/jpeg',
+                                            'image/pjpeg',
+                                            'image/png'
+                                        ]
+                                    ])
+                                ]
+                            ]
+                        ),
+                    ]
+                ]
+            ])
+        ;
+```
 
 Credits
 -------

@@ -122,7 +122,7 @@ protected $file_fields = array(';
  */
 public function deleteI18nFiles()
 {
-    $files = BaseAttachFileQuery::create()
+    $files = \ItBlaster\AttachFileBundle\Model\AttachFileQuery::create()
             ->filterByModel($this->getClassAlias()."_i18n")
             ->filterByObjectId($this->getId())
             ->find();
@@ -427,7 +427,7 @@ public function getFileObject($field)
     if (!isset($this->file_objects[$field])) {
         $name = ucfirst(\Propel\PropelBundle\Util\PropelInflector::camelize($field));
         $file_object_id = $this->getByName($name);
-        $file_object = $file_object_id ? BaseAttachFileQuery::create()->findOneById($file_object_id) : false;
+        $file_object = $file_object_id ? \ItBlaster\AttachFileBundle\Model\AttachFileQuery::create()->findOneById($file_object_id) : false;
 
         if ($file_object) {
             $this->file_objects[$field] = $file_object;

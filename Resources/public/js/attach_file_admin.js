@@ -23,5 +23,5 @@ function file_delete(e) {
 }
 
 $(function(){
-    $(document).on('click', '.attach_file_delete', file_delete);
+    $('.attach_file_delete').unbind('click').bind('click', file_delete);
 })
