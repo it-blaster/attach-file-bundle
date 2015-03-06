@@ -66,7 +66,6 @@ class AttachFileType extends FileType
         $field = substr($view->vars['name'], 0, -5);
         $object_i18n = $view->parent->vars['data'];
         $attach_file = $object_i18n->getFileObject($field);
-        dump($options);
         $view->vars['options'] = $options;
         if (!$attach_file->isNew() && $attach_file->issetFile()) {
             $view->vars['object'] = $object_i18n;
