@@ -27,7 +27,22 @@ class AttachFileType extends FileType
             'empty_data' => null,
             'multiple' => false,
             'object' => false,
-            'help' => ''
+            'help' => 'Допустимые типы файлов: pdf, doc, docx, zip, jpg, gif, png',
+            'constraints' => [
+                new \Symfony\Component\Validator\Constraints\File([
+                    'mimeTypes' => [
+                        'application/pdf',
+                        'application/msword',
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                        'application/vnd.oasis.opendocument.text',
+                        'application/zip',
+                        'image/gif',
+                        'image/jpeg',
+                        'image/pjpeg',
+                        'image/png'
+                    ]
+                ])
+            ]
         ));
     }
 
@@ -51,6 +66,7 @@ class AttachFileType extends FileType
         $field = substr($view->vars['name'], 0, -5);
         $object_i18n = $view->parent->vars['data'];
         $attach_file = $object_i18n->getFileObject($field);
+        dump($options);
         $view->vars['options'] = $options;
         if (!$attach_file->isNew() && $attach_file->issetFile()) {
             $view->vars['object'] = $object_i18n;
