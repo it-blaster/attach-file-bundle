@@ -125,7 +125,7 @@ Use i18n
         </behavior>
     </table>
 ```
-Далее подключаем виджет attach_file в фадмин-форме:
+Далее подключаем виджет attach_file в админ-форме:
 ``` xml
         $formMapper
             ->add('DocumentI18ns', new TranslationCollectionType(), [
