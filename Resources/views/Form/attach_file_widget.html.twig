@@ -2,9 +2,6 @@
 
 {% block attach_file_widget %}
     {{- block('form_widget') -}}
-    {% if options.help %}
-        <span class="help-block sonata-ba-field-help" style="margin-bottom: 0">{{ options.help }}</span>
-    {% endif %}
 
     {% if object %}
         <div class="file_block" style="padding-top: 5px;">

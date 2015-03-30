@@ -4,6 +4,7 @@ namespace ItBlaster\AttachFileBundle\Form\Type;
 
 
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -22,12 +23,12 @@ class AttachFileType extends FileType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'compound' => false,
-            'data_class' => 'Symfony\Component\HttpFoundation\File\File',
-            'empty_data' => null,
-            'multiple' => false,
-            'object' => false,
-            'help' => 'Допустимые типы файлов: pdf, doc, docx, zip, jpg, gif, png',
+            'compound'    => false,
+            'data_class'  => 'Symfony\Component\HttpFoundation\File\File',
+            'empty_data'  => null,
+            'multiple'    => false,
+            'object'      => false,
+            'sonata_help' => 'Допустимые типы файлов: pdf, doc, docx, zip, jpg, gif, png',
             'constraints' => [
                 new \Symfony\Component\Validator\Constraints\File([
                     'mimeTypes' => [
@@ -46,10 +47,11 @@ class AttachFileType extends FileType
         ));
     }
 
+
     /**
-     * @param FormView $view
+     * @param FormView      $view
      * @param FormInterface $form
-     * @param array $options
+     * @param array         $options
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {

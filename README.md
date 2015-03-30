@@ -172,7 +172,7 @@ Use i18n
                             'label'     => 'Выберите файл',
                             'maxSize'   => '20M',
                             'options' => [
-                                'help' => 'Допустимые типы файлов: pdf, doc, docx, zip, jpg, gif, png',
+                                'sonata_help' => 'Допустимые типы файлов: pdf, doc, docx, zip, jpg, gif, png',
                                 'constraints' => [
                                     new \Symfony\Component\Validator\Constraints\File([
                                         'mimeTypes' => [
