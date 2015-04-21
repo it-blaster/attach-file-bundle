@@ -14,7 +14,7 @@ class AttachFile extends BaseAttachFile
     public function deleteFile()
     {
         $file_path = $this->fullFilePath();
-        if (file_exists($file_path)) {
+        if (is_file($file_path)) {
             unlink($file_path);
         }
         $this
