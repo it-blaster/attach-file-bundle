@@ -85,4 +85,12 @@ class AttachFileType extends FileType
     {
         return 'attach_file';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'attach_file';
+    }
 }
